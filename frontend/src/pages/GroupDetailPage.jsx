@@ -33,7 +33,7 @@ export default function GroupDetailPage() {
   const [filterMember, setFilterMember] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const membersById = Object.fromEntries(members.map(m => [String(m.id), m]));
-  const BACKEND_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '');
+  const BACKEND_BASE = (import.meta.env.VITE_API_URL || 'https://expense-tracker-3nwb.onrender.com/api').replace(/\/api\/?$/, '');
   const getImageUrl = (url) => url ? (url.startsWith('http') ? url : `${BACKEND_BASE}${url}`) : '';
   const distinctCategories = [...new Set(expenses.map(e => e.category).filter(Boolean))];
 
@@ -137,7 +137,7 @@ export default function GroupDetailPage() {
   async function handleExportPdf() {
     try {
       const token = localStorage.getItem('ledger-token');
-      const BACKEND_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api');
+      const BACKEND_URL = (import.meta.env.VITE_API_URL || 'https://expense-tracker-3nwb.onrender.com/api');
       const res = await fetch(`${BACKEND_URL}/groups/${groupId}/report`, {
         headers: { Authorization: `Bearer ${token}` }
       });
