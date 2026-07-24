@@ -9,7 +9,10 @@ const pool = mysql.createPool({
   port: process.env.DB_PORT || 3306,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  // Aiven (and most managed MySQL hosts) require SSL. Set DB_SSL=true in
+  // production env vars; leave unset for local development.
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : undefined
 });
 
 module.exports = pool;
